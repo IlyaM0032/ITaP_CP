@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "sorting_algorithms.h"
 #include "file_interface.h"
+#include "unit_tests.h"
 
 #include <fstream>
 #include <iomanip>
@@ -33,7 +34,7 @@ void main_menu() {
         std::cout << "4) Отсортировать матрицу и провести анализ" << std::endl;
         std::cout << "5) Вывести отсортированную матрицу в консоль" << std::endl;
         std::cout << "6) Сохранить отсортированную матрицу в файл" << std::endl;
-        // std::cout << "7) Провести тестирование программы" << std::endl;
+        std::cout << "7) Провести тестирование программы" << std::endl;
         std::cout << "0) Выход" << std::endl;
         std::cout << std::endl;
         std::cout << "Выберите соответствующий пункт меню: ";
@@ -90,6 +91,12 @@ void main_menu() {
                     break;
                 }
                 save_matrix_to_file(sorted_matrix.value());
+                break;
+
+            case OPTION_START_UNIT_TESTS:
+                if (make_tests()) {
+                    std::cout << "Тестирование пройдено успешно" << std::endl;
+                }
                 break;
 
             case OPTION_EXIT:
@@ -185,8 +192,6 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
     std::cout << std::endl;
     std::cout << "Количество сравнений элементов: " << bubble_sort.get_comparisons() << std::endl;
     std::cout << "Количество перестановок элементов: " << bubble_sort.get_permutations() << std::endl;
-
-
 
     // 2) скопировать, отсортировать сортировкой отбором
     // вывести отсортированную, вывести статистику по методу
