@@ -207,7 +207,7 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
 
     if (bubble_sorted_matrix!= selection_sorted_matrix) {
         std::cout << "Ошибка, матрицы отсортированные пузырьком и выбором не совпадают!" << std::endl;
-        return;
+        // return;
     }
 
     // 3) скопировать, отсортировать сортировкой вставкой
@@ -224,7 +224,7 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
 
     if (selection_sorted_matrix!= insertion_sorted_matrix) {
         std::cout << "Ошибка, матрицы отсортированные выбором и вставкой не совпадают!" << std::endl;
-        return;
+        // return;
     }
 
     // 4) скопировать, отсортировать сортировкой Шелла
@@ -241,7 +241,7 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
 
     if (insertion_sorted_matrix!= shall_sorted_matrix) {
         std::cout << "Ошибка, матрицы отсортированные вставкой и Шеллом не совпадают!" << std::endl;
-        return;
+        // return;
     }
 
     // 5) скопировать, отсортировать быстрой сортировкой
@@ -259,7 +259,7 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
 
     if (shall_sorted_matrix!= quick_sorted_matrix) {
         std::cout << "Ошибка, матрицы отсортированные Шеллом и быстрой не совпадают!" << std::endl;
-        return;
+        // return;
     }
 
     std::cout << "Сравнение методов сортировки: " << std::endl;
@@ -292,7 +292,28 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
     << std::setw(SUMM_COLUMN_WITH) << quick_sort.get_permutations() + quick_sort.get_comparisons() << " │" << std::endl;
     std::cout << "└────────────────────────┴──────────────────────┴─────────────────────────┴───────────────────────────────┘" << std::endl;
 
-    result_matrix = std::move(quick_sorted_matrix);
+    bool success = true;
+    if (bubble_sorted_matrix!= selection_sorted_matrix) {
+        std::cout << "Ошибка, матрицы отсортированные пузырьком и выбором не совпадают!" << std::endl;
+        success = false;
+    }
+    if (selection_sorted_matrix!= insertion_sorted_matrix) {
+        std::cout << "Ошибка, матрицы отсортированные выбором и вставкой не совпадают!" << std::endl;
+        success = false;
+    }
+    if (insertion_sorted_matrix!= shall_sorted_matrix) {
+        std::cout << "Ошибка, матрицы отсортированные вставкой и Шеллом не совпадают!" << std::endl;
+        success = false;
+    }
+    if (shall_sorted_matrix!= quick_sorted_matrix) {
+        std::cout << "Ошибка, матрицы отсортированные Шеллом и быстрой не совпадают!" << std::endl;
+        success = false;
+    }
+    if (success) {
+        result_matrix = std::move(quick_sorted_matrix);
+    } else {
+        std::cout << "В процессе сортировки получились разые матрицы, отсортированная матрица не была сохранена" << std::endl;
+    }
 }
 
 // void print_sorted_matrix(std::vector<std::vector<int>>& sorted_matrix) {
@@ -309,10 +330,10 @@ void save_matrix_to_file(const std::vector<std::vector<int>>& sorted_matrix) {
         std::cout << "Матрица пуста" << std::endl;
         return;
     }
-    auto output_file = open_output_file();
-    print_matrix(sorted_matrix, output_file);
+    auto file = open_output_file();
+    print_matrix(sorted_matrix, file);
     std::cout << "Успешно!" << std::endl;
-    output_file.close();
+    file.close();
 }
 
 
