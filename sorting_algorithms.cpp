@@ -114,39 +114,46 @@ void QuickSort::Sort(std::vector<int>& array, const int begin, const int end) {
     }
 }
 
+// void sort_matrix(std::vector<std::vector<int>>& matrix, ISort& sorting_class) {
+//     std::vector<int> even_elements;
+//     for (auto& row : matrix) {
+//         for (auto& element : row) {
+//             if (element % 2 == 0) {even_elements.push_back(element);}
+//         }
+//     } // собрать все четные
+//     sorting_class.Sort(even_elements);
+//     auto even_elements_iterator = even_elements.begin();
+//
+//     for (auto& row : matrix) {
+//         for (auto& element : row) {
+//             if (element % 2 == 0) {element = *even_elements_iterator++;}
+//         }
+//     } // вернуть на место
+//
+//     std::vector<int> odd_elements;
+//     for (int column = 0; column < matrix[0].size(); column++) {
+//         for (int row = 0; row < matrix.size(); row++) {
+//             if (matrix[row][column] % 2 != 0) {
+//                 odd_elements.push_back(matrix[row][column]);
+//             }
+//         }
+//     } // собрать все нечетные
+//
+//     sorting_class.Sort(odd_elements);
+//     auto odd_elements_iterator = odd_elements.begin();
+//
+//     for (int column = 0; column < matrix[0].size(); column++) {
+//         for (int row = 0; row < matrix.size(); row++) {
+//             if (matrix[row][column] % 2 != 0) {
+//                 matrix[row][column] = *odd_elements_iterator++;
+//             }
+//         }
+//     } // вернуть на место
+// }
+
 void sort_matrix(std::vector<std::vector<int>>& matrix, ISort& sorting_class) {
     std::vector<int> even_elements;
     for (auto& row : matrix) {
-        for (auto& element : row) {
-            if (element % 2 == 0) {even_elements.push_back(element);}
-        }
-    } // собрать все четные
-    sorting_class.Sort(even_elements);
-    auto even_elements_iterator = even_elements.begin();
-
-    for (auto& row : matrix) {
-        for (auto& element : row) {
-            if (element % 2 == 0) {element = *even_elements_iterator++;}
-        }
-    } // вернуть на место
-
-    std::vector<int> odd_elements;
-    for (int column = 0; column < matrix[0].size(); column++) {
-        for (int row = 0; row < matrix.size(); row++) {
-            if (matrix[row][column] % 2 != 0) {
-                odd_elements.push_back(matrix[row][column]);
-            }
-        }
-    } // собрать все нечетные
-
-    sorting_class.Sort(odd_elements);
-    auto odd_elements_iterator = odd_elements.begin();
-
-    for (int column = 0; column < matrix[0].size(); column++) {
-        for (int row = 0; row < matrix.size(); row++) {
-            if (matrix[row][column] % 2 != 0) {
-                matrix[row][column] = *odd_elements_iterator++;
-            }
-        }
-    } // вернуть на место
+        ///
+    }
 }
