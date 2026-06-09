@@ -1,6 +1,7 @@
-//
-// Created by ilyam0032 on 23.05.2026.
-//
+// sorting_algorithms.h
+// Алгоритмы сортировок
+// Студент группы 4503, Илья М, 2026
+
 
 #ifndef ITAP_CP_SORTING_ALGORITHMS_H
 #define ITAP_CP_SORTING_ALGORITHMS_H

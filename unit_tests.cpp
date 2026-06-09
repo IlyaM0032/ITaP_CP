@@ -1,6 +1,6 @@
-//
-// Created by ilyam0032 on 24.05.2026.
-//
+// unit_tests.cpp
+// Файл модульного тестирования
+// Студент группы 4503, Илья М, 2026
 
 #include <limits.h>
 #include <vector>
