@@ -4,7 +4,6 @@
 
 #ifndef ITAP_TESTS_MAIN_MENU_H
 #define ITAP_TESTS_MAIN_MENU_H
-#include <optional>
 #include <vector>
 
 enum main_menu_options {
@@ -23,6 +22,5 @@ void main_menu();
 void enter_matrix(std::vector<std::vector<int>>& matrix);
 void enter_matrix_from_file(std::vector<std::vector<int>>& matrix);
 void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::vector<std::vector<int>>& result_matrix);
-// void print_sorted_matrix(const std::optional<std::vector<std::vector<int>>>& sorted_matrix);
 void save_matrix_to_file(const std::vector<std::vector<int>>& sorted_matrix);
 #endif // ITAP_TESTS_MAIN_MENU_H

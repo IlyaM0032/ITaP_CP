@@ -81,6 +81,7 @@ void main_menu() {
                     std::cout << "Сортировка матрицы ещё не была произведена";
                     break;
                 }
+                std::cout << "Отсортированая матрица" << std::endl;
                 print_matrix(sorted_matrix.value(), std::cout);
                 // print_sorted_matrix(sorted_matrix);
                 break;
@@ -117,9 +118,9 @@ void enter_matrix(std::vector<std::vector<int>>& matrix) {
     // 2) получить количество строк
     // 3) заполнить случайными значениями?
     // 4) нет - заполнить вручную
-    std::cout << "Введите количество строк N" << std::endl;
-    int rows = read_natural();
     std::cout << "Введите количество строк M" << std::endl;
+    int rows = read_natural();
+    std::cout << "Введите количество столбцов N" << std::endl;
     int columns = read_natural();
 
     matrix.assign(rows, std::vector<int>(columns, 0));
@@ -142,9 +143,9 @@ void enter_matrix(std::vector<std::vector<int>>& matrix) {
 }
 void enter_matrix_from_file(std::vector<std::vector<int>>& matrix) {
     std::cout << "Перед получением матрицы из файла укажите её размерность" << std::endl;
-    std::cout << "Введите количество строк N" << std::endl;
-    int rows = read_natural();
     std::cout << "Введите количество строк M" << std::endl;
+    int rows = read_natural();
+    std::cout << "Введите количество столбцов N" << std::endl;
     int columns = read_natural();
 
     matrix.assign(rows, std::vector<int>(columns, 0));
@@ -292,6 +293,27 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
     << std::setw(SUMM_COLUMN_WITH) << quick_sort.get_permutations() + quick_sort.get_comparisons() << " │" << std::endl;
     std::cout << "└────────────────────────┴──────────────────────┴─────────────────────────┴───────────────────────────────┘" << std::endl;
 
+    std::cout << std::endl;
+
+    std::string most_optimal = "пузырьковая сортировка";
+    long long least_ops = bubble_sort.get_permutations() + bubble_sort.get_comparisons();
+    if (selection_sort.get_permutations() + selection_sort.get_comparisons() < least_ops) {
+        least_ops = selection_sort.get_permutations() + selection_sort.get_comparisons();
+        most_optimal = "сортировка выбором";
+    }
+    if (insertion_sort.get_permutations() + insertion_sort.get_comparisons() < least_ops) {
+        most_optimal = "сортировка вставкой";
+        least_ops = insertion_sort.get_permutations() + insertion_sort.get_comparisons();
+    }
+    if (shall_sort.get_permutations() + shall_sort.get_comparisons() < least_ops) {
+        most_optimal = "сортировка Шелла";
+        least_ops = shall_sort.get_permutations() + shall_sort.get_comparisons();
+    }
+    if (quick_sort.get_permutations() + quick_sort.get_comparisons() < least_ops) {
+        most_optimal = "быстрая сортировка";
+    }
+
+
     bool success = true;
     if (bubble_sorted_matrix!= selection_sorted_matrix) {
         std::cout << "Ошибка, матрицы отсортированные пузырьком и выбором не совпадают!" << std::endl;
@@ -311,19 +333,12 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
     }
     if (success) {
         result_matrix = std::move(quick_sorted_matrix);
+        std::cout << "Наиболее эффективной оказалась: " << most_optimal << std::endl;
     } else {
         std::cout << "В процессе сортировки получились разые матрицы, отсортированная матрица не была сохранена" << std::endl;
     }
 }
 
-// void print_sorted_matrix(std::vector<std::vector<int>>& sorted_matrix) {
-//     if (!sorted_matrix) {
-//         std::cout << "Сортировка матрицы ещё не была произведена." << std::endl;
-//         return;
-//     }
-//     std::cout << "Отсортированная матрица:" << std::endl;
-//     print_matrix(sorted_matrix.value(), std::cout);
-// }
 
 void save_matrix_to_file(const std::vector<std::vector<int>>& sorted_matrix) {
     if (sorted_matrix.empty()) {

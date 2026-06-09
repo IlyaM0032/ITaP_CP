@@ -1,10 +1,9 @@
-//
-// Created by ilyam0032 on 23.05.2026.
-//
+// sorting_algorithms.cpp
+// Алгоритмы сортировок
+// Студент группы 4503, Илья М, 2026
 
 #include "sorting_algorithms.h"
 
-#include <algorithm>
 
 
 void BubbleSort::Sort(std::vector<int>& array) {
@@ -70,8 +69,7 @@ void ShallSort::Sort(std::vector<int> &array) {
     for (int h = array.size()/2; h > 0; h/=2) {
         for (int i = h; i < array.size(); i++) {
             // int temp = array[i];
-            int j = i;
-            for (; j >= h; j -= h) {
+            for (int j = i; j >= h; j -= h) {
                 ++comparison;
                 if (array[j-h] > array[j]) {
                     ++permutations;
@@ -117,21 +115,6 @@ void QuickSort::Sort(std::vector<int>& array, const int begin, const int end) {
 }
 
 void sort_matrix(std::vector<std::vector<int>>& matrix, ISort& sorting_class) {
-    // for (auto & line : matrix) {
-    //     std::vector<int> even_elements;
-    //     std::copy_if(
-    //         line.begin(), line.end(),back_inserter(even_elements),
-    //         [](int x){return x % 2 == 0;}
-    //         );
-    //     sorting_class.Sort(even_elements);
-    //
-    //     auto even_elements_iterator = even_elements.begin();
-    //
-    //     for_each(
-    //         line.begin(), line.end(),
-    //         [&even_elements_iterator](int& x){if (x % 2 == 0) x = *even_elements_iterator++;}
-    //         );
-    // } // отсортированы четные по строкам
     std::vector<int> even_elements;
     for (auto& row : matrix) {
         for (auto& element : row) {

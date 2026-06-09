@@ -1,12 +1,10 @@
 // utils.cpp
-// Общий файл контрольных работ
+// Вспомогательные функции
 // Студент группы 4503, Илья М, 2026
 
 #include "utils.h"
 
-#ifdef _WIN32
-#define timegm _mkgmtime
-#endif
+
 
 #define RAND_MIN_ (-1000)
 #define RAND_MAX_ 1000
