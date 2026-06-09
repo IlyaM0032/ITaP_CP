@@ -126,7 +126,7 @@ void enter_matrix(std::vector<std::vector<int>>& matrix) {
 
     matrix.assign(rows, std::vector<int>(columns, 0));
     std::cout << "Ввести " << rows*columns<< " значений вручную? [Y/N]" << std::endl;
-    bool decision = read_decision();A
+    bool decision = read_decision();
 
 
     for (size_t row = 0; row < rows; row++) {
