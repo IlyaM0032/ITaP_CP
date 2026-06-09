@@ -48,22 +48,26 @@ int read_natural() {
     return result;
 }
 
-bool read_decision(bool default_decision) {
-    std::string input;
-    std::getline(std::cin, input);
-    if (input.empty()) {
-        return default_decision;
-    }
-    switch (input[0]) {
-    case 'Y':
-    case 'y':
-        return true;
-    case 'N':
-    case 'n':
-    default:
-        return false;
+bool read_decision() {
+    do {
+        std::string input;
+        std::getline(std::cin, input);
+        if (input.empty()) {
+            std::cout << "Некорректный ввод. Введите Y или N: ";
+            continue;
+        }
 
-    }
+        switch (input[0]) {
+        case 'Y':
+        case 'y':
+            return true;
+        case 'N':
+        case 'n':
+            return false;
+        default:
+            std::cout << "Некорректный ввод. Введите Y или N: ";
+        }
+    } while (true);
 }
 
 int random_int() {

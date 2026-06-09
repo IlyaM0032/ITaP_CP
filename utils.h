@@ -4,17 +4,14 @@
 
 #ifndef UTILS_H
 #define UTILS_H
-#include <iostream>
-#include <list>
 #include <memory>
-#include <string>
 #include <vector>
 
 
 int read_int();
 
 int read_natural();
-bool read_decision(bool);
+bool read_decision();
 
 int random_int();
 

@@ -19,8 +19,8 @@ std::ofstream open_output_file() {
         std::getline(std::cin, path);
 
         if (std::filesystem::exists(path)) {
-            std::cout << "Файл уже существует — перезаписать? [y/N]: ";
-            if (read_decision(false) == false) continue;
+            std::cout << "Файл уже существует — перезаписать? [Y/N]: ";
+            if (read_decision() == false) continue;
         }
 
         std::ofstream output_file(path, std::ios::out);

@@ -11,15 +11,15 @@
 
 class ISort {
 protected:
-    long long comparison = 0;
-    long long permutations = 0;
+    unsigned long long comparison = 0;
+    unsigned long long permutations = 0;
 
 public:
     virtual ~ISort() = default;
     virtual void Sort(std::vector<int>& array) = 0;
 
-    long long get_comparisons() const { return comparison; }
-    long long get_permutations() const { return permutations; }
+    unsigned long long get_comparisons() const { return comparison; }
+    unsigned long get_permutations() const { return permutations; }
 };
 
 class BubbleSort : public ISort {

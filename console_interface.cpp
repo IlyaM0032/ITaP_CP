@@ -10,6 +10,7 @@
 #include "file_interface.h"
 #include "unit_tests.h"
 
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -124,8 +125,8 @@ void enter_matrix(std::vector<std::vector<int>>& matrix) {
     int columns = read_natural();
 
     matrix.assign(rows, std::vector<int>(columns, 0));
-    std::cout << "Ввести " << rows*columns<< " значений вручную? [y/N]" << std::endl;
-    bool decision = read_decision(false);
+    std::cout << "Ввести " << rows*columns<< " значений вручную? [Y/N]" << std::endl;
+    bool decision = read_decision();A
 
 
     for (size_t row = 0; row < rows; row++) {
@@ -295,23 +296,21 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
 
     std::cout << std::endl;
 
-    std::string most_optimal = "пузырьковая сортировка";
-    long long least_ops = bubble_sort.get_permutations() + bubble_sort.get_comparisons();
-    if (selection_sort.get_permutations() + selection_sort.get_comparisons() < least_ops) {
-        least_ops = selection_sort.get_permutations() + selection_sort.get_comparisons();
-        most_optimal = "сортировка выбором";
-    }
-    if (insertion_sort.get_permutations() + insertion_sort.get_comparisons() < least_ops) {
-        most_optimal = "сортировка вставкой";
-        least_ops = insertion_sort.get_permutations() + insertion_sort.get_comparisons();
-    }
-    if (shall_sort.get_permutations() + shall_sort.get_comparisons() < least_ops) {
-        most_optimal = "сортировка Шелла";
-        least_ops = shall_sort.get_permutations() + shall_sort.get_comparisons();
-    }
-    if (quick_sort.get_permutations() + quick_sort.get_comparisons() < least_ops) {
-        most_optimal = "быстрая сортировка";
-    }
+
+
+    std::vector<std::pair<std::string, unsigned long long>> stats = {
+        {"пузырьковая сортировка", bubble_sort.get_permutations() + bubble_sort.get_comparisons()},
+        {"сортировка выбором",     selection_sort.get_permutations() + selection_sort.get_comparisons()},
+        {"сортировка вставкой",    insertion_sort.get_permutations() + insertion_sort.get_comparisons()},
+        {"сортировка Шелла",       shall_sort.get_permutations() + shall_sort.get_comparisons()},
+        {"быстрая сортировка",     quick_sort.get_permutations() + quick_sort.get_comparisons()}
+    };
+
+    auto min_element_iterator = std::min_element(
+        stats.begin(), stats.end(),
+        [](auto const &a, auto const &b){ return a.second < b.second; }
+    );
+    unsigned long long least_ops = min_element_iterator->second;
 
 
     bool success = true;
@@ -333,10 +332,15 @@ void make_analyse_on_matrix(const std::vector<std::vector<int>>& matrix, std::ve
     }
     if (success) {
         result_matrix = std::move(quick_sorted_matrix);
-        std::cout << "Наиболее эффективной оказалась: " << most_optimal << std::endl;
+        std::cout << "Наиболее эффективными оказались: ";
+        std::for_each(
+            stats.begin(), stats.end(), [&](auto const &x) {
+                if (x.second == least_ops) std::cout << x.first << "; ";
+            });
     } else {
         std::cout << "В процессе сортировки получились разые матрицы, отсортированная матрица не была сохранена" << std::endl;
     }
+    std::cout << std::endl;
 }
 
 
